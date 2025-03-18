@@ -28,11 +28,11 @@ void Application::streamer_task(void *param)
 {
   Application *app = (Application *)param;
   // now just read from the microphone and send to the clients
-  int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * 1024);
+  int16_t *samples = (int16_t *)malloc(sizeof(int16_t) * BUFFER_LEN);
   while (true)
   {
     // read from the microphone
-    int samples_read = app->input->read(samples, 1024);
+    int samples_read = app->input->read(samples, BUFFER_LEN);
     // send to the two transports
     app->transport1->send(samples, samples_read * sizeof(int16_t));
     app->transport2->send(samples, samples_read * sizeof(int16_t));
